@@ -14,6 +14,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import io.pismo.challenge.bean.TransactionResponseDTO;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,4 +48,7 @@ public class Transaction implements Serializable {
 	@Column(nullable = false, updatable = false)
 	private LocalDateTime eventDate;
 
+	public TransactionResponseDTO toResponse() {
+		return TransactionResponseDTO.builder().build();
+	}
 }
