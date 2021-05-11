@@ -1,6 +1,7 @@
 package io.pismo.challenge.bean;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
@@ -41,5 +42,10 @@ public class AccountResponseDTO implements Serializable {
 	@Schema(name = "document_number", description = "Document number that identifies a person or a company on the Government system. It must contain 11 "
 			+ "characters for a person and 14 for a company.", example = "41338592009", pattern = "^([0-9]{11}|[0-9]{14})$")
 	private String documentNumber;
+
+	@NotNull
+	@JsonProperty("available_credit")
+	@Schema(name = "available_credit", description = "Available credit for transactions.", example = "12345.67")
+	private BigDecimal availableCredit;
 
 }

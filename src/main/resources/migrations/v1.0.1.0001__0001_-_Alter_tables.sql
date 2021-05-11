@@ -1,0 +1,1 @@
+ALTER TABLE account ADD COLUMN available_credit NUMERIC(19,2) NOT NULL DEFAULT 0;

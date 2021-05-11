@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -48,8 +49,12 @@ public class Account implements Serializable {
 	@Column(length = 14, nullable = false, updatable = false)
 	private String documentNumber;
 
+	@Builder.Default
+	@Column(precision = 19, scale = 2, nullable = false)
+	private BigDecimal availableCredit = BigDecimal.ZERO;
+
 	public AccountResponseDTO toResponse() {
-		return AccountResponseDTO.builder().id(id).documentType(documentType.code()).documentNumber(documentNumber).build();
+		return AccountResponseDTO.builder().id(id).documentType(documentType.code()).documentNumber(documentNumber).availableCredit(availableCredit).build();
 	}
 
 }
