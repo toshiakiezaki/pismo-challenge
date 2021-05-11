@@ -19,15 +19,7 @@ mvn clean install
 
 ### Executando o projeto em modo de desenvolvimento
 
-O projeto atualmente tem como requisito mínimo que exista um servidor do PostgreSQL carregado na estação do desenvolvedor. Para que não haja diferenciações na configuração deste servidor, podemos efetuar a carga deste serviço usando parte da configuração disponível via Docker Compose, conforme demonstrado abaixo: 
-
-```bash
-# Carregando apenas a instância do container Docker (Caso queira acompanhar os logs, recomenda-se
-# remover o parâmetro "-d", responsável por rodar os comandos em segundo plano
-docker-compose up postgres -d
-```
-
-Para a inicialização do projeto por linha de comando em modo de desenvolvimento, é necessário apenas chamar uma tarefa disponível nos plugins do Maven que este fará toda a configuração necessária ao projeto, conforme a instrução abaixo:
+O projeto não possui requisito mínimo para execução, pois este roda através de uma base H2 em modo de desenvolvimento. Para a inicialização do projeto por linha de comando em modo de desenvolvimento, é necessário apenas chamar uma tarefa disponível nos plugins do Maven que este fará toda a configuração necessária ao projeto, conforme a instrução abaixo:
 
 ```bash
 # Carregando a aplicação por linha de comando
