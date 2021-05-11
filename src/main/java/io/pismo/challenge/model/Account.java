@@ -5,6 +5,7 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -12,6 +13,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import io.pismo.challenge.bean.AccountResponseDTO;
 import io.pismo.challenge.domain.DocumentType;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
@@ -41,5 +43,9 @@ public class Account extends PanacheEntityBase implements Serializable {
 
 	@Column(length = 14, nullable = false, updatable = false)
 	private String documentNumber;
+
+	public AccountResponseDTO toResponse() {
+		return AccountResponseDTO.builder().id(id).documentType(documentType.code()).documentNumber(documentNumber).build();
+	}
 
 }
