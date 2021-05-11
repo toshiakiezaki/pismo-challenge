@@ -49,6 +49,7 @@ public class Transaction implements Serializable {
 	private LocalDateTime eventDate;
 
 	public TransactionResponseDTO toResponse() {
-		return TransactionResponseDTO.builder().build();
+		return TransactionResponseDTO.builder().id(id).account(account.getId()).operationType(operationType.getId()).amount(amount).eventDate(eventDate)
+				.build();
 	}
 }

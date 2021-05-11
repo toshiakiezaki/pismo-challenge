@@ -1,5 +1,8 @@
 package io.pismo.challenge.model;
 
+import static io.pismo.challenge.domain.OperationEntry.CREDIT;
+import static io.pismo.challenge.domain.OperationEntry.DEBIT;
+import static java.util.Objects.isNull;
 import static javax.persistence.EnumType.STRING;
 import static lombok.AccessLevel.PRIVATE;
 
@@ -45,5 +48,12 @@ public class OperationType implements Serializable {
 	@Type(type = "operation_entry")
 	@Column(nullable = false, updatable = false, columnDefinition = "operation_entry")
 	private OperationEntry entry;
+
+	public boolean isCredit() {
+		if (isNull(entry)) {
+			return false;
+		}
+		return entry == CREDIT;
+	}
 
 }

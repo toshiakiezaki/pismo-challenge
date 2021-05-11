@@ -13,6 +13,7 @@ public class TransactionRepository {
 	EntityManager entityManager;
 
 	public Transaction persist(Transaction entity) {
+		entityManager.persist(entity);
 		return entity;
 	}
 }
