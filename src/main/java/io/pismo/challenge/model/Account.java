@@ -5,7 +5,6 @@ import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.io.Serializable;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
@@ -13,9 +12,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+
 import io.pismo.challenge.bean.AccountResponseDTO;
+import io.pismo.challenge.configuration.DatabaseEnumType;
 import io.pismo.challenge.domain.DocumentType;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -30,7 +32,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor(access = PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
-public class Account extends PanacheEntityBase implements Serializable {
+@TypeDef(name = "document_type", typeClass = DatabaseEnumType.class)
+public class Account implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
@@ -38,7 +41,8 @@ public class Account extends PanacheEntityBase implements Serializable {
 	private Long id;
 
 	@Enumerated(STRING)
-	@Column(nullable = false, updatable = false)
+	@Type(type = "document_type")
+	@Column(nullable = false, updatable = false, columnDefinition = "document_type")
 	private DocumentType documentType;
 
 	@Column(length = 14, nullable = false, updatable = false)

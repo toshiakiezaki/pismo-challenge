@@ -29,7 +29,7 @@ public class AccountService {
 
 	@Transactional(SUPPORTS)
 	public AccountResponseDTO findById(Long id) {
-		return accountRepository.findByIdOptional(id).map(Account::toResponse).orElseThrow();
+		return accountRepository.findById(id).map(Account::toResponse).orElseThrow();
 	}
 
 }

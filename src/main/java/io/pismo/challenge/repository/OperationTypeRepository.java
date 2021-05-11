@@ -1,10 +1,13 @@
 package io.pismo.challenge.repository;
 
 import javax.enterprise.context.ApplicationScoped;
-
-import io.pismo.challenge.model.OperationType;
-import io.quarkus.hibernate.orm.panache.PanacheRepositoryBase;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 @ApplicationScoped
-public class OperationTypeRepository implements PanacheRepositoryBase<OperationType, Long> {
+public class OperationTypeRepository {
+
+	@Inject
+	EntityManager entityManager;
+
 }

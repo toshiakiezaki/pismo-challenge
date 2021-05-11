@@ -11,9 +11,11 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
+import io.pismo.challenge.configuration.DatabaseEnumType;
 import io.pismo.challenge.domain.OperationEntry;
-import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -28,8 +30,9 @@ import lombok.NoArgsConstructor;
 @Immutable
 @NoArgsConstructor
 @AllArgsConstructor(access = PRIVATE)
+@TypeDef(name = "operation_entry", typeClass = DatabaseEnumType.class)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
-public class OperationType extends PanacheEntityBase implements Serializable {
+public class OperationType implements Serializable {
 
 	@Id
 	@Column(nullable = false, updatable = false)
@@ -39,7 +42,8 @@ public class OperationType extends PanacheEntityBase implements Serializable {
 	private String description;
 
 	@Enumerated(STRING)
-	@Column(nullable = false, updatable = false)
+	@Type(type = "operation_entry")
+	@Column(nullable = false, updatable = false, columnDefinition = "operation_entry")
 	private OperationEntry entry;
 
 }
