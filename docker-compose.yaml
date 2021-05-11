@@ -1,0 +1,27 @@
+version: "3.3"
+services:
+  application:
+    build:
+      context: .
+      dockerfile: "src/main/docker/Dockerfile.jvm"
+    ports:
+      - 8080:8080
+      - 5005:5005
+    links:
+      - postgres
+    depends_on:
+      - postgres
+    environment:
+      JAVA_ENABLE_DEBUG: "true"
+  postgres:
+    image: postgres:13.2-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - "postgres_data:/var/lib/postgresql/data"
+    environment:
+      POSTGRES_USER: "pismo"
+      POSTGRES_PASSWORD: "challenge"
+      POSTGRES_DB: "pismo"
+volumes:
+  postgres_data:
