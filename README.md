@@ -22,8 +22,8 @@ mvn clean install
 O projeto atualmente tem como requisito mínimo que exista um servidor do PostgreSQL carregado na estação do desenvolvedor. Para que não haja diferenciações na configuração deste servidor, podemos efetuar a carga deste serviço usando parte da configuração disponível via Docker Compose, conforme demonstrado abaixo: 
 
 ```bash
-# Carregando apenas a instância do container Docker (Caso queira acompanhar os logs, recomenda-se remover o parâmetro "-d",
-# responsável por rodar os comandos em segundo plano
+# Carregando apenas a instância do container Docker (Caso queira acompanhar os logs, recomenda-se
+# remover o parâmetro "-d", responsável por rodar os comandos em segundo plano
 docker-compose up postgres -d
 ```
 
