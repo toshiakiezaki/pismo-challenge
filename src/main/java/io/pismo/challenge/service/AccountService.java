@@ -10,6 +10,7 @@ import javax.transaction.Transactional;
 import io.pismo.challenge.bean.AccountRequestDTO;
 import io.pismo.challenge.bean.AccountResponseDTO;
 import io.pismo.challenge.domain.DocumentType;
+import io.pismo.challenge.exception.AccountNotFoundException;
 import io.pismo.challenge.model.Account;
 import io.pismo.challenge.repository.AccountRepository;
 
@@ -28,7 +29,7 @@ public class AccountService {
 
 	@Transactional(SUPPORTS)
 	public AccountResponseDTO findById(Long id) {
-		return accountRepository.findById(id).map(Account::toResponse).orElseThrow();
+		return accountRepository.findById(id).map(Account::toResponse).orElseThrow(() -> new AccountNotFoundException(id));
 	}
 
 }

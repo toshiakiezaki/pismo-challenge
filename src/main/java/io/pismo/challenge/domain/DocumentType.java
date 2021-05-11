@@ -3,6 +3,8 @@ package io.pismo.challenge.domain;
 import static java.util.Arrays.stream;
 import static java.util.Objects.isNull;
 
+import io.pismo.challenge.exception.DocumentNumberFormatException;
+
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -22,7 +24,8 @@ public enum DocumentType {
 		if (isNull(documentNumber)) {
 			return null;
 		}
-		return stream(values()).filter(type -> type.documentLength == documentNumber.length()).findAny().orElseThrow();
+		return stream(values()).filter(type -> type.documentLength == documentNumber.length()).findAny()
+				.orElseThrow(() -> new DocumentNumberFormatException(documentNumber));
 	}
 
 }

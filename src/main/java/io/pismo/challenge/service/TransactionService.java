@@ -9,6 +9,8 @@ import javax.transaction.Transactional;
 
 import io.pismo.challenge.bean.TransactionRequestDTO;
 import io.pismo.challenge.bean.TransactionResponseDTO;
+import io.pismo.challenge.exception.AccountNotFoundException;
+import io.pismo.challenge.exception.OperationTypeNotFoundException;
 import io.pismo.challenge.model.Transaction;
 import io.pismo.challenge.repository.AccountRepository;
 import io.pismo.challenge.repository.OperationTypeRepository;
@@ -28,8 +30,9 @@ public class TransactionService {
 
 	@Transactional(REQUIRED)
 	public TransactionResponseDTO create(TransactionRequestDTO dto) {
-		var account = accountRepository.findById(dto.getAccount()).orElseThrow();
-		var operationType = operationTypeRepository.findById(dto.getOperationType()).orElseThrow();
+		var account = accountRepository.findById(dto.getAccount()).orElseThrow(() -> new AccountNotFoundException(dto.getAccount(), "account"));
+		var operationType = operationTypeRepository.findById(dto.getOperationType())
+				.orElseThrow(() -> new OperationTypeNotFoundException(dto.getOperationType(), "operationType"));
 		var entity = Transaction.builder().account(account).operationType(operationType)
 				.amount(operationType.isCredit() ? dto.getAmount() : dto.getAmount().negate()).eventDate(LocalDateTime.now()).build();
 		return transactionRepository.persist(entity).toResponse();
