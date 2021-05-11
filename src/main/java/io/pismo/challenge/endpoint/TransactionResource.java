@@ -20,6 +20,7 @@ import org.eclipse.microprofile.openapi.annotations.responses.APIResponses;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import io.pismo.challenge.bean.AccountResponseDTO;
+import io.pismo.challenge.bean.ErrorResponseDTO;
 import io.pismo.challenge.bean.TransactionRequestDTO;
 import io.pismo.challenge.bean.TransactionResponseDTO;
 import io.pismo.challenge.service.TransactionService;
@@ -38,7 +39,9 @@ public class TransactionResource {
 	// {@formatter:off}
 	@Operation(summary = "Transaction creation", description = "Creates an transaction using the provided information.")
 	@APIResponses(value = {
-		@APIResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = TransactionResponseDTO.class)))
+		@APIResponse(responseCode = "201", description = "Created", content = @Content(schema = @Schema(implementation = TransactionResponseDTO.class))),
+		@APIResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(implementation = ErrorResponseDTO[].class))),
+		@APIResponse(responseCode = "404", description = "Not found", content = @Content(schema = @Schema(implementation = ErrorResponseDTO[].class)))
 	})
 	// {@formatter:on}
 	public Response create(@Valid @RequestBody TransactionRequestDTO request) {

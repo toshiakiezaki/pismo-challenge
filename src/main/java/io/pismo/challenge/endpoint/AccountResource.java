@@ -27,6 +27,7 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import io.pismo.challenge.bean.AccountRequestDTO;
 import io.pismo.challenge.bean.AccountResponseDTO;
+import io.pismo.challenge.bean.ErrorResponseDTO;
 import io.pismo.challenge.service.AccountService;
 
 @ApplicationScoped
@@ -43,7 +44,8 @@ public class AccountResource {
 	// {@formatter:off}
 	@Operation(summary = "Account creation", description = "Creates an account using the provided information.")
 	@APIResponses(value = {
-		@APIResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AccountResponseDTO.class)))
+		@APIResponse(responseCode = "201", description = "Created", content = @Content(schema = @Schema(implementation = AccountResponseDTO.class))),
+		@APIResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(implementation = ErrorResponseDTO[].class)))
 	})
 	// {@formatter:on}
 	public Response create(@Valid @RequestBody AccountRequestDTO request) {
@@ -58,7 +60,9 @@ public class AccountResource {
 		@Parameter(name = "id",  description = "A positive number that identifies an account.", required = true, example = "1")
 	})
 	@APIResponses(value = {
-		@APIResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AccountResponseDTO.class)))
+		@APIResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = AccountResponseDTO.class))),
+		@APIResponse(responseCode = "400", description = "Bad request", content = @Content(schema = @Schema(implementation = ErrorResponseDTO[].class))),
+		@APIResponse(responseCode = "404", description = "Not found", content = @Content(schema = @Schema(implementation = ErrorResponseDTO[].class)))
 	})
 	// {@formatter:on}
 	public Response findById(@Positive @PathParam("id") Long id) {
