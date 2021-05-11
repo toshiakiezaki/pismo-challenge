@@ -6,7 +6,7 @@ CREATE TABLE account (
 );
 
 CREATE TABLE operation_type (
-    id BIGSERIAL NOT NULL,
+    id BIGINT NOT NULL,
     description VARCHAR(120) NOT NULL,
     entry OPERATION_ENTRY NOT NULL,
     CONSTRAINT pk_operation_type PRIMARY KEY(id)

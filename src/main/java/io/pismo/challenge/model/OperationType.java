@@ -1,16 +1,16 @@
 package io.pismo.challenge.model;
 
 import static javax.persistence.EnumType.STRING;
-import static javax.persistence.GenerationType.IDENTITY;
 import static lombok.AccessLevel.PRIVATE;
 
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Immutable;
 
 import io.pismo.challenge.domain.OperationEntry;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
@@ -25,13 +25,13 @@ import lombok.NoArgsConstructor;
 @Table
 @Entity
 @Builder
+@Immutable
 @NoArgsConstructor
 @AllArgsConstructor(access = PRIVATE)
 @EqualsAndHashCode(callSuper = false, onlyExplicitlyIncluded = true)
 public class OperationType extends PanacheEntityBase implements Serializable {
 
 	@Id
-	@GeneratedValue(strategy = IDENTITY)
 	@Column(nullable = false, updatable = false)
 	private Long id;
 
