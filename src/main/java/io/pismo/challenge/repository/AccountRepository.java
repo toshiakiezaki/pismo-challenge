@@ -25,8 +25,9 @@ public class AccountRepository {
 		}
 	}
 
-	public void persist(Account account) {
+	public Account persist(Account account) {
 		entityManager.persist(account);
+		return account;
 	}
 
 }

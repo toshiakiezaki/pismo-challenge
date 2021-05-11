@@ -23,8 +23,7 @@ public class AccountService {
 	public AccountResponseDTO create(AccountRequestDTO dto) {
 		var entity = Account.builder().documentType(DocumentType.from(dto.getDocumentNumber())).documentNumber(dto.getDocumentNumber())
 				.build();
-		accountRepository.persist(entity);
-		return entity.toResponse();
+		return accountRepository.persist(entity).toResponse();
 	}
 
 	@Transactional(SUPPORTS)
