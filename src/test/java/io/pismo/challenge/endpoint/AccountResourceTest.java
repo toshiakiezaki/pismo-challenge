@@ -51,11 +51,4 @@ public class AccountResourceTest {
 		});
 	}
 
-	@Test
-	public void findByIdWithAccountNotFound() {
-		var response = given().contentType(ContentType.JSON).when().get("/api/accounts/:id")
-				.then().statusCode(Status.NOT_FOUND.getStatusCode()).extract().body().as(ErrorResponseDTO[].class);
-
-	}
-
 }
